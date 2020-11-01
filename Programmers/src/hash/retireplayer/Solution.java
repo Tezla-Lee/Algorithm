@@ -1,9 +1,10 @@
 package hash.retireplayer;
 
+import jdk.dynalink.Operation;
+
 import java.lang.reflect.Member;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
 
 // https://programmers.co.kr/learn/courses/30/lessons/42576
 
@@ -23,7 +24,7 @@ public class Solution {
         System.out.println(hash);
 
         Iterator<Map.Entry<String, Integer>> ir = hash.entrySet().iterator();
-
+        List<String> list = Arrays.asList("a","b");
         while (ir.hasNext()) {
             Map.Entry<String, Integer> key = ir.next();
             if (key.getValue() > 0) {
