@@ -4,46 +4,45 @@ import java.util.ArrayList;
 
 public class Solution {
     public int solution(String str1, String str2) {
-        int answer;
         ArrayList<String> s1 = new ArrayList<>();
         ArrayList<String> s2 = new ArrayList<>();
         ArrayList<String> intersection;
         str1 = str1.toUpperCase();
         str2 = str2.toUpperCase();
-
+        String strTemp;
         for (int i = 0; i < str1.length() - 1; i++) {
-            char t = str1.charAt(i);
-            if ((t >= 48 && t <= 57) || (t >= 65 && t <= 90)) {
-                s1.add(str1.substring(i, i + 2));
-            } else {
-                s1.remove(s1.size() - 1);
+            strTemp = str1.substring(i, i + 2);
+            String[] temp = strTemp.split("");
+            if (temp[0].charAt(0) >= 65 && temp[0].charAt(0) <= 90 &&
+                    temp[1].charAt(0) >= 65 && temp[1].charAt(0) <= 90) {
+                s1.add(strTemp);
             }
         }
-//        s2 = s1;
+
         for (int i = 0; i < str2.length() - 1; i++) {
-            char t = str2.charAt(i);
-            if ((t >= 48 && t <= 57) || (t >= 65 && t <= 90)) {
-                s2.add(str2.substring(i, i + 2));
-            } else {
-                s2.remove(s2.size() - 1);
+            strTemp = str2.substring(i, i + 2);
+            String[] temp = strTemp.split("");
+            if (temp[0].charAt(0) >= 65 && temp[0].charAt(0) <= 90 &&
+                    temp[1].charAt(0) >= 65 && temp[1].charAt(0) <= 90) {
+                s2.add(strTemp);
             }
         }
-        System.out.println(s1);
-        System.out.println(s2);
-
         int s1Size = s1.size();
-        intersection = s2;
+        intersection = (ArrayList<String>) s2.clone();
 
-        for (String s : s1) {
+        for (
+                String s : s1) {
             s2.remove(s);
         }
-//        System.out.println(s2);
-        for (String s : s1) {
+        for (
+                String s : s2) {
             intersection.remove(s);
         }
-        System.out.println(intersection);
-        answer = intersection.size() * 65536 / (s1Size + s2.size());
-        return answer;
+
+        if (s1Size + s2.size() == 0) {
+            return 65536;
+        }
+        return intersection.size() * 65536 / (s1Size + s2.size());
     }
 
     public static void main(String[] args) {
@@ -53,10 +52,7 @@ public class Solution {
         System.out.println(new Solution().solution("handshake", "shake hands"));
         System.out.println();
         System.out.println(new Solution().solution("aa1+aa2", "AAAA12"));
-//        System.out.println((int) '0');
-//        System.out.println((int) '9');
-//        System.out.println((int) 'A');
-//        System.out.println((int) 'Z');
-//        System.out.println((int) ' ');
+        System.out.println();
+        System.out.println(new Solution().solution("E=M*C^2", "e=m*c^2"));
     }
 }
