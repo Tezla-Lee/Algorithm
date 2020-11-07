@@ -1,4 +1,4 @@
-package 월간코드챌린지시즌1.프로그래밍2;
+package 월간코드챌린지시즌1.이진변환반복하기;
 
 public class Solution {
     public int[] solution(String s) {

@@ -1,4 +1,4 @@
-package 월간코드챌린지시즌1.프로그래밍1;
+package 월간코드챌린지시즌1.내적;
 
 public class Solution {
     public int solution(int[] a, int[] b) {
