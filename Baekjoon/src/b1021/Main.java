@@ -28,13 +28,14 @@ public class Main {
         for (int i = 0; i < m; i++) {
             int next = want.poll();
             count += Math.min(Math.abs(list.indexOf(next) - current), list.size() - Math.abs(list.indexOf(next) - current));
-            System.out.print(next + " ");
-            System.out.println(list);
-            System.out.print(list.indexOf(next) + " ");
-            System.out.println(Math.min(Math.abs(list.indexOf(next) - current), list.size() - Math.abs(list.indexOf(next) - current)));
             current = list.indexOf(next);
-            list.remove(next);
+            for (int j = 0; j < list.size(); j++) {
+                if (list.get(j) == next) {
+                    list.remove(j);
+                    break;
+                }
+            }
         }
-//        System.out.println(count);
+        System.out.println(count);
     }
 }
