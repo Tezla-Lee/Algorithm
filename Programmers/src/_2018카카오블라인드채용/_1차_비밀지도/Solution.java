@@ -13,7 +13,7 @@ public class Solution {
         for (int i = 0; i < n; i++) {
             StringBuilder map = new StringBuilder();
             if (binaryArr[i].length() < n) {
-                map.append(" ".repeat(n - binaryArr[i].length()));
+//                map.append(" ".repeat(n - binaryArr[i].length()));
             }
             for (int j = 0; j < binaryArr[i].length(); j++) {
                 if (binaryArr[i].charAt(j) == '0') {
