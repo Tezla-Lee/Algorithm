@@ -1,4 +1,4 @@
-package 탐욕법.bigNum;
+package 탐욕법.큰_수_만들기;
 
 // https://programmers.co.kr/learn/courses/30/lessons/42883
 class BigNum {

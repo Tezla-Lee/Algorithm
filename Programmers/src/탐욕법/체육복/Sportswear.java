@@ -1,4 +1,4 @@
-package 탐욕법.sportwear;
+package 탐욕법.체육복;
 
 import java.util.HashSet;
 

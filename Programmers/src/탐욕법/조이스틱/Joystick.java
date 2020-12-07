@@ -1,4 +1,4 @@
-package 탐욕법.joystick;
+package 탐욕법.조이스틱;
 
 import java.util.Arrays;
 // https://programmers.co.kr/learn/courses/30/lessons/42860

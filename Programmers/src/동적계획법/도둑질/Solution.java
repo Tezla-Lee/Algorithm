@@ -1,23 +1,19 @@
 package 동적계획법.도둑질;
 
-import java.util.Arrays;
-
 class Solution {
     public int solution(int[] money) {
-        int answer = 0;
-        int[] dp = new int[money.length + 1];
-        dp[1] = money[0];
-        for (int i = 2; i < dp.length; i++) {
-            dp[i] = Math.max(dp[i - 1], dp[i - 2] + money[i - 1]);
-            if (i == dp.length -1 ) {
-
-            }
+        int[] dp1 = new int[money.length];
+        int[] dp2 = new int[money.length];
+        dp1[1] = money[0];
+        dp2[1] = money[1];
+        for (int i = 2; i < dp1.length; i++) {
+            dp1[i] = Math.max(dp1[i - 1], dp1[i - 2] + money[i - 1]);
+            dp2[i] = Math.max(dp2[i - 1], dp2[i - 2] + money[i]);
         }
-        System.out.println(Arrays.toString(dp));
-        return answer;
+        return Math.max(dp1[money.length - 1], dp2[money.length - 1]);
     }
 
     public static void main(String[] args) {
-        new Solution().solution(new int[]{1, 2, 3, 1, 3, 10});
+        System.out.println(new Solution().solution(new int[]{3, 10, 9, 1, 3, 10}));
     }
 }
