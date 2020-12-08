@@ -1,4 +1,4 @@
-package 그래프;
+package 그래프.가장_먼_노드;
 
 import java.util.ArrayList;
 import java.util.Arrays;
