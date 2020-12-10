@@ -36,20 +36,17 @@ public class Main {
     static boolean[][][] isVisited;
     static int[] dx = {1, 0, 0, -1};
     static int[] dy = {0, 1, -1, 0};
-    static int min = Integer.MAX_VALUE;
 
     static void bfs() {
-        Stack<Point> queue = new Stack<>();
+        Queue<Point> queue = new LinkedList<>();
         queue.add(new Point(1, 1, 0, 1));
         isVisited[1][1][0] = true;
-        isVisited[1][1][1] = true;
         dp[1][1] = 1;
 
         while (!queue.isEmpty()) {
-            Point point = queue.pop();
+            Point point = queue.poll();
 
             if (point.x == n && point.y == m) {
-//                min = Math.min(min, point.count);
                 System.out.println(point.count);
                 return;
             }
@@ -64,13 +61,11 @@ public class Main {
                         if (!isVisited[tempX][tempY][point.breakWall]) {
                             isVisited[tempX][tempY][point.breakWall] = true;
                             queue.add(new Point(tempX, tempY, point.breakWall, point.count + 1));
-//                            dp[tempX][tempY] = Math.min(dp[point.x][point.y] + 1, dp[tempX][tempY]);
                         }
                     } else { // 벽
                         if (point.breakWall == 0 && !isVisited[tempX][tempY][1]) { // 벽 부신적 있는지 확인
                             queue.add(new Point(tempX, tempY, 1, point.count + 1));
                             isVisited[tempX][tempY][1] = true;
-//                            dp[tempX][tempY] = Math.min(dp[point.x][point.y] + 1, dp[tempX][tempY]);
                         }
                     }
                 }
