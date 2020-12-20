@@ -21,6 +21,7 @@ public class Main2 {
             operators[i] = Integer.parseInt(st.nextToken());
         }
 
+
         calculate(numbers[0], 1);
         System.out.println(max);
         System.out.println(min);
