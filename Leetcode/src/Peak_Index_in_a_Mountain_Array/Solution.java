@@ -1,4 +1,4 @@
-package L852_Peak_Index_in_a_Mountain_Array;
+package Peak_Index_in_a_Mountain_Array;
 
 class Solution {
     public int peakIndexInMountainArray(int[] arr) {

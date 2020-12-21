@@ -16,7 +16,7 @@ public class Main {
         int sum = 0;
 
         // 큐에 하나가 남을 때까지 큐에서 가장 작은 수 2개를 더해서 다시 큐에 넣어줌.
-        while (priorityQueue.size() > 1) {
+        while (priorityQueue.size() != 1) {
             int temp = priorityQueue.poll() + priorityQueue.poll();
             sum += temp;
             priorityQueue.add(temp);
