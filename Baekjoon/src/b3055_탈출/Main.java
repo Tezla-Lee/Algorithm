@@ -18,11 +18,6 @@ public class Main {
         isVisited = new boolean[r][c];
 
         Location start = null;
-        Location end = null;
-        int startRow = 0;
-        int startCol = 0;
-        int endRow = 0;
-        int endCol = 0;
 
         for (int i = 0; i < r; i++) {
             char[] row = br.readLine().toCharArray();
@@ -30,24 +25,17 @@ public class Main {
                 map[i][j] = row[j];
                 if (row[j] == 'S') {
                     start = new Location(i, j);
-                    startRow = i;
-                    startCol = j;
-                } else if (row[j] == 'D') {
-                    end = new Location(i, j);
-                    endRow = i;
-                    endCol = j;
+                    isVisited[i][j] = true;
                 }
             }
         }
 
-        isVisited[startRow][startCol] = true;
-//        dfs(startRow, startCol, endRow, endCol, map, 0);
-        bfs(start, end, map);
+        bfs(start, map);
 
-        if (min == Integer.MAX_VALUE) {
-            System.out.println("KAKTUS");
+        if (flag) {
+            System.out.println(count);
         } else {
-            System.out.println(min);
+            System.out.println("KAKTUS");
         }
     }
 
@@ -57,74 +45,58 @@ public class Main {
     static int[] dx = {1, -1, 0, 0};
     static int[] dy = {0, 0, 1, -1};
     static boolean[][] isVisited;
-    static int min = Integer.MAX_VALUE;
 
-    static void dfs(int startRow, int startCol, int endRow, int endCol, char[][] map, int depth) {
 
-        char[][] temp = new char[r][c];
+    static int count = 0;
+    static boolean flag;
 
-        for (int i = 0; i < r; i++) {
-            temp[i] = map[i].clone();
-        }
+    static void bfs(Location start, char[][] map) {
+        Queue<Location> queue = new LinkedList<>();
+        Queue<Location> queue2 = new LinkedList<>();
 
-//        for (int i = 0; i < r; i++) {
-//            for (int j = 0; j < c; j++) {
-//                System.out.print(temp[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//        System.out.println();
+        queue.add(start);
+        isVisited[start.row][start.col] = true;
 
-        if (startRow == endRow && startCol == endCol) {
-            min = Math.min(min, depth);
-//            System.out.println("통과 : " + depth);
-            return;
-        }
 
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
+        do {
+            count++;
+            water(map);
 
-                if (map[i][j] == '*') {
+            while (!queue2.isEmpty()) {
+                queue.add(queue2.poll());
+            }
 
-                    for (int k = 0; k < 4; k++) {
-                        int tempX = i + dx[k];
-                        int tempY = j + dy[k];
+            while (!queue.isEmpty()) {
 
-                        if (tempX >= 0 && tempX < r && tempY >= 0 && tempY < c) {
-                            if (map[tempX][tempY] == '.') {
-                                temp[tempX][tempY] = '*';
-                            }
+                Location curr = queue.poll();
+
+                for (int i = 0; i < 4; i++) {
+                    int tempX = curr.row + dx[i];
+                    int tempY = curr.col + dy[i];
+
+                    if (tempX >= 0 && tempX < r && tempY >= 0 && tempY < c && !isVisited[tempX][tempY]) {
+                        if (map[tempX][tempY] == '.') {
+                            isVisited[tempX][tempY] = true;
+                            queue2.add(new Location(tempX, tempY));
+//                            map[tempX][tempY] = 'S';
+                        } else if (map[tempX][tempY] == 'D') {
+                            flag = true;
+                            return;
                         }
                     }
                 }
             }
-        }
 
-//        temp = water(temp);
+        } while (!queue2.isEmpty());
 
-        for (int i = 0; i < 4; i++) {
-            int tempX = startRow + dx[i];
-            int tempY = startCol + dy[i];
-
-            if (tempX >= 0 && tempX < r && tempY >= 0 && tempY < c && !isVisited[tempX][tempY] && (temp[tempX][tempY] == '.' || temp[tempX][tempY] == 'D')) {
-                isVisited[tempX][tempY] = true;
-                temp[tempX][tempY] = 'S';
-                temp[startRow][startCol] = '.';
-                dfs(tempX, tempY, endRow, endCol, temp, depth + 1);
-                isVisited[tempX][tempY] = false;
-                temp[tempX][tempY] = '.';
-                temp[startRow][startCol] = 'S';
-            }
-        }
     }
+    static void water(char[][] arr) {
+        char[][] temp = new char[r][c];
 
-        static void water(char[][] arr) {
-//        char[][] temp = new char[r][c];
-//
-//        for (int i = 0; i < r; i++) {
-//            temp[i] = arr[i].clone();
-//        }
-//
+        for (int i = 0; i < r; i++) {
+            temp[i] = arr[i].clone();
+        }
+
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
 
@@ -135,58 +107,21 @@ public class Main {
                         int tempY = j + dy[k];
 
                         if (tempX >= 0 && tempX < r && tempY >= 0 && tempY < c) {
-                            if (arr[tempX][tempY] == '.') {
-                                arr[tempX][tempY] = '*';
+                            if (arr[tempX][tempY] == '.' || arr[tempX][tempY] == 'S') {
+                                temp[tempX][tempY] = '*';
                             }
                         }
                     }
                 }
             }
         }
-//        return temp;
-    }
 
-
-    static Queue<Location> queue = new LinkedList<>();
-
-    static void bfs(Location start, Location end, char[][] map) {
-
-        queue.add(start);
-        isVisited[start.row][start.col] = true;
-
-        int count = queue.size();
-
-        while (!queue.isEmpty()) {
-            water(map);
-
-            for (int i = 0; i < count; i++) {
-                Location curr = queue.poll();
-
-                if (curr.row == end.row && curr.col == end.col) {
-                    System.out.println("통과");
-                    return;
-                }
-
-                for (int j = 0; j < 4; j++) {
-                    int tempX = curr.row + dx[j];
-                    int tempY = curr.col + dy[j];
-
-                    if (tempX >= 0 && tempX < r && tempY >= 0 && tempY < c && !isVisited[tempX][tempY] && (map[tempX][tempY] == '.' || map[tempX][tempY] == 'D')) {
-                        isVisited[tempX][tempY] = true;
-                        queue.add(new Location(tempX, tempY));
-//                    map[tempX][tempY] = 'S';
-//                    map[curr.row][curr.col] = '.';
-//                    isVisited[tempX][tempY] = false;
-//                    map[tempX][tempY] = '.';
-//                    map[curr.row][curr.col] = 'S';
-                    }
-                }
-            }
+        for (int i = 0; i < r; i++) {
+            arr[i] = temp[i].clone();
         }
     }
 
 }
-
 
 class Location {
     int row;
