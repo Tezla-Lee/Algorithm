@@ -3,61 +3,55 @@ package b9466;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int testCase = Integer.parseInt(br.readLine());
-        for (int i = 0; i < testCase; i++) {
-            int studentNum = Integer.parseInt(br.readLine());
-            arr = new int[studentNum + 1];
-            isVisited = new boolean[studentNum + 1];
-            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        StringBuilder sb = new StringBuilder();
+        int t = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < t; i++) {
+            int n = Integer.parseInt(br.readLine());
+            student = new int[n + 1];
+            isVisited = new boolean[n + 1];
+            isFinished = new boolean[n + 1];
             count = 0;
-            for (int j = 1; j < arr.length; j++) {
-                arr[j] = Integer.parseInt(st.nextToken());
+            teamNumber = 0;
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for (int j = 1; j <= n; j++) {
+                student[j] = Integer.parseInt(st.nextToken());
             }
-//            System.out.println(Arrays.toString(arr));
-            for (int j = 1; j < studentNum + 1; j++) {
+            for (int j = 1; j <= n; j++) {
                 if (!isVisited[j]) {
-                    System.out.print("start: " + j + ", ");
-                    team = new ArrayList<>();
-                    dfs(j, team);
-                    System.out.println();
+                    dfs(j, student[j]);
                 }
             }
-            System.out.println();
-            System.out.println(studentNum - count);
+            System.out.println(Arrays.toString(isFinished));
+            sb.append(n - count).append("\n");
         }
+        System.out.println(sb);
     }
 
-    static int[] arr;
+    static int count;
+    static int teamNumber;
+    static int[] student;
+    static boolean[] isFinished;
     static boolean[] isVisited;
-    static int count = 0;
-    static ArrayList<Integer> team;
 
-    public static boolean dfs(int student, ArrayList<Integer> team) {
-        isVisited[student] = true;
-        team.add(student);
-        System.out.print(student + " ");
-        if (student == arr[student]) {
-            count += 1;
-            System.out.println("count : " + count);
-            return true;
-        }
-        if (team.contains(arr[student])) {
-            isVisited[arr[student]] = true;
-            count += team.size() - team.indexOf(arr[student]);
-            System.out.println("count : " + count);
-            return true;
+    static void dfs(int start, int next) {
+        isVisited[start] = true;
+        if (!isVisited[next]) {
+            dfs(next, student[next]);
         } else {
-            if (!isVisited[arr[student]]) {
-                dfs(arr[student], team);
+            if (!isFinished[next]) {
+                count++;
+                for (int i = next; i != start; i = student[i]) {
+                    count++;
+                }
             }
         }
-//        isVisited[student] = false;
-        return true;
+        isFinished[start] = true;
     }
 }
