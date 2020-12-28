@@ -1,4 +1,4 @@
-package Peak_Index_in_a_Mountain_Array;
+package peakIndexInAMountainArray;
 
 class Solution {
     public int peakIndexInMountainArray(int[] arr) {

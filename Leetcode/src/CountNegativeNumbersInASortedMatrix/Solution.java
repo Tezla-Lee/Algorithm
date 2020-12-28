@@ -1,4 +1,4 @@
-package CountNegativeNumbersInASortedMatrix;
+package countNegativeNumbersInASortedMatrix;
 
 import java.util.Arrays;
 
@@ -39,7 +39,7 @@ public class Solution {
 
     public static void main(String[] args) {
         System.out.println(new Solution().countNegatives(new int[][]{{4, 0, 0, 1}, {3, 2, 1, 2}, {1, 1, 3, 8}, {9, 1, 2, 3}, {5, 5, 5, 5}}));
-//        System.out.println(new Solution().countNegatives(new int[][]{{4, 0, 0, -1}, {3, 2, 1, -1}, {1, 1, -1, -2}, {-1, -1, -2, -3}, {-5, -5, -5, -5}}));
+        System.out.println(new Solution().countNegatives(new int[][]{{4, 0, 0, -1}, {3, 2, 1, -1}, {1, 1, -1, -2}, {-1, -1, -2, -3}, {-5, -5, -5, -5}}));
 //        System.out.println();
 //        System.out.println(new Solution().countNegatives(new int[][]{{7, 6, 6, 6, 3, 3, -2}, {-2, -3, -3, -3, -5, -5, -5}, {-2, -4, -5, -5, -5, -5, -5},
 //                {-3, -5, -5, -5, -5, -5, -5}, {-4, -5, -5, -5, -5, -5, -5}, {-5, -5, -5, -5, -5, -5, -5}, {-5, -5, -5, -5, -5, -5, -5}, {-5, -5, -5, -5, -5, -5, -5}}));

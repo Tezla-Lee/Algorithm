@@ -52,23 +52,20 @@ public class Main {
 
     static void bfs(Location start, char[][] map) {
         Queue<Location> queue = new LinkedList<>();
-        Queue<Location> queue2 = new LinkedList<>();
 
         queue.add(start);
         isVisited[start.row][start.col] = true;
 
-
-        do {
+        while (!queue.isEmpty()) {
             count++;
             water(map);
 
-            while (!queue2.isEmpty()) {
-                queue.add(queue2.poll());
-            }
+            Queue<Location> temp = new LinkedList<>(queue);
+            queue = new LinkedList<>();
 
-            while (!queue.isEmpty()) {
+            while (!temp.isEmpty()) {
 
-                Location curr = queue.poll();
+                Location curr = temp.poll();
 
                 for (int i = 0; i < 4; i++) {
                     int tempX = curr.row + dx[i];
@@ -77,8 +74,7 @@ public class Main {
                     if (tempX >= 0 && tempX < r && tempY >= 0 && tempY < c && !isVisited[tempX][tempY]) {
                         if (map[tempX][tempY] == '.') {
                             isVisited[tempX][tempY] = true;
-                            queue2.add(new Location(tempX, tempY));
-//                            map[tempX][tempY] = 'S';
+                            queue.add(new Location(tempX, tempY));
                         } else if (map[tempX][tempY] == 'D') {
                             flag = true;
                             return;
@@ -86,10 +82,9 @@ public class Main {
                     }
                 }
             }
-
-        } while (!queue2.isEmpty());
-
+        }
     }
+
     static void water(char[][] arr) {
         char[][] temp = new char[r][c];
 

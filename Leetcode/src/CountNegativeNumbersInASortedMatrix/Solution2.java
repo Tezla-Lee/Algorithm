@@ -1,4 +1,4 @@
-package CountNegativeNumbersInASortedMatrix;
+package countNegativeNumbersInASortedMatrix;
 
 import java.util.Arrays;
 
