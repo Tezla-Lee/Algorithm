@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main3 {
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -26,7 +26,7 @@ public class Main3 {
 
         int num = 0;
         while (min == -1) {
-            setLadders(ladders, 0, 0, num++, 0);
+            setLadders(ladders, 1, 1, num++, 0);
             if (num == 4) {
                 break;
             }
@@ -48,22 +48,17 @@ public class Main3 {
             return;
         }
 
-        for (int i = 1; i < h + 1; i++) {
-            if (i < a) {
-                continue;
-            }
-            for (int j = 1; j < n; j++) {
-                if (i == a && j <= b) {
-                    continue;
-                }
+        for (int i = a; i < h + 1; i++) {
+            for (int j = b; j < n; j++) {
                 if (ladders[i][j] == 0 && ladders[i][j + 1] == 0) {
                     ladders[i][j] = 1;
                     ladders[i][j + 1] = -1;
-                    setLadders(ladders, i, j, addLaddersNum, count + 1);
+                    setLadders(ladders, i, j + 2, addLaddersNum, count + 1);
                     ladders[i][j] = 0;
                     ladders[i][j + 1] = 0;
                 }
             }
+            b = 1;
         }
     }
 
@@ -72,8 +67,12 @@ public class Main3 {
             int row = 0;
             int col = i;
 
-            for (int j = 0; j <= h + 1; j++) {
-                col += arr[row][col];
+            for (int j = 0; j <= h; j++) {
+                if (arr[row][col] == 1) {
+                    col++;
+                } else if (arr[row][col] == -1) {
+                    col--;
+                }
                 row++;
             }
             if (col != i) {
