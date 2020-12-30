@@ -4,7 +4,7 @@
 ![프로그래머스 레벨1](img/level1.png)
 
 ## 작성코드
-### 문제 1. 최대공약수와 최소공배수
+### [문제 1. 최대공약수와 최소공배수](https://github.com/Tezla-Lee/Algorithm/blob/master/FastCampus/src/level1/p1_%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98_%EC%B5%9C%EC%86%8C%EA%B3%B5%EB%B0%B0%EC%88%98/Solution.java)
 ```java
 package level1.p1_최대공약수_최소공배수;
 
@@ -25,7 +25,7 @@ class Solution {
 }
 ```
 
-### 문제 2. 배열에서 가장 작은 수 제거
+### [문제 2. 배열에서 가장 작은 수 제거](https://github.com/Tezla-Lee/Algorithm/blob/master/FastCampus/src/level1/p2_%EC%B5%9C%EC%86%8C%EC%88%98%EC%A0%9C%EA%B1%B0/Solution.java)
 ```java
 package level1.p2_최소수제거;
 
