@@ -42,6 +42,7 @@ public class Main2 {
             return 1;
         }
 
+
         // 왔던 곳인지 확인
         if (dp[row][col] == -1) {
             dp[row][col] = 0;
@@ -56,6 +57,13 @@ public class Main2 {
                     }
                 }
             }
+        }
+        System.out.println();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.printf("%3d", dp[i][j]);
+            }
+            System.out.println();
         }
         return dp[row][col];
     }

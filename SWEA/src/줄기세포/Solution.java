@@ -85,7 +85,8 @@ public class Solution {
                         arr[tempX][tempY][2] = lifeForce;
                         arr[tempX][tempY][3] = time;
                         // 겹칠 때 더 큰 생명력으로
-                    } else if (arr[tempX][tempY][0] < arr[cell.row][cell.col][0] && arr[tempX][tempY][1] == 2 && arr[tempX][tempY][3] == time) {
+                    } else if (arr[tempX][tempY][0] < arr[cell.row][cell.col][0] &&
+                            arr[tempX][tempY][1] == 2 && arr[tempX][tempY][3] == time) {
                         arr[tempX][tempY][0] = lifeForce;
                         arr[tempX][tempY][1] = 2;
                         arr[tempX][tempY][2] = lifeForce;
@@ -105,20 +106,6 @@ public class Solution {
                 }
             }
         }
-//        System.out.println();
-//        for (int j = 0; j < arr.length; j++) {
-//            for (int l = 0; l < arr[0].length; l++) {
-//                if (arr[j][l][0] == 0) {
-//                    System.out.printf("%2c ", '.');
-//                } else if (arr[j][l][1] > 0) {
-//                    System.out.printf("[%d]", arr[j][l][0]);
-//                } else {
-//                    System.out.printf("%2d ", arr[j][l][0]);
-//                }
-//            }
-//            System.out.println();
-//        }
-
         return bfs(queue1, arr, time + 1, end);
     }
 
