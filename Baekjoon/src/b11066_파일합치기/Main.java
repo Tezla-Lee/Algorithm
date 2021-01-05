@@ -13,10 +13,10 @@ public class Main {
         for (int i = 0; i < t; i++) {
             int n = Integer.parseInt(br.readLine());
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int[] fileSizes = new int[n + 1];
+            int[] files = new int[n + 1];
             int[][] dp = new int[n + 1][n + 1];
             for (int j = 1; j < n + 1; j++) {
-                fileSizes[j] = Integer.parseInt(st.nextToken());
+                files[j] = Integer.parseInt(st.nextToken());
             }
 
             long sum = 0;
@@ -26,21 +26,13 @@ public class Main {
         System.out.println(sb);
     }
 
-    static int merge(int[][] dp, int[] arr, int start, int end) {
-        if (start == end) {
-            return 0;
+    static void merge(int[][] dp, int[] files) {
+        for (int i = 0; i < dp.length - 1; i++) {
+            dp[i][i + 1] = files[i] + files[i + 1];
         }
 
-        if (start + 1 == end) {
-            return arr[start] + arr[end];
+        for (int i = 0; i < dp.length; i++) {
+
         }
-
-        for (int i = 1; i < dp.length; i++) {
-            for (int j = 1; j < dp.length; j++) {
-
-            }
-        }
-
-        return -1;
     }
 }
