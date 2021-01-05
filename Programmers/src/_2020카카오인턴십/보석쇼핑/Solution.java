@@ -1,6 +1,5 @@
 package _2020카카오인턴십.보석쇼핑;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -29,11 +28,14 @@ public class Solution {
             queue.add(gems[i]);
             map2.put(gems[i], map2.getOrDefault(gems[i], 0) + 1);
             end = i;
+            // 모든 종류의 보석이 모두 채워지면
             if (map.size() == map2.size()) {
+                // 먼저 넣었던 애들부터 2개이상이면 빼줌.
                 while (map2.get(queue.peek()) > 1) {
                     map2.put(queue.peek(), map2.getOrDefault(queue.poll(), 0) - 1);
                     start++;
                 }
+                // 길이가 더 작아지면 저장
                 if (end - start < minLength) {
                     answer[0] = start + 1;
                     answer[1] = end + 1;
@@ -42,9 +44,5 @@ public class Solution {
             }
         }
         return answer;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Solution().solution(new String[]{"DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"})));
     }
 }
