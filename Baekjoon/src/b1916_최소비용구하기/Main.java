@@ -38,29 +38,32 @@ public class Main {
     }
 
     static int dijkstra(ArrayList<Node>[] costs, int departure, int arrival) {
-        Queue<Node> queue = new PriorityQueue<>();
+        Queue<Node> queue = new PriorityQueue<>(); // PriorityQueue 의미가 없음...
         queue.add(new Node(departure, 0));
 
         int[] minCost = new int[costs.length];
+
         Arrays.fill(minCost, Integer.MAX_VALUE);
         minCost[departure] = 0;
 
 
         while (!queue.isEmpty()) {
-            Node temp = queue.poll();
-            for (Node node : costs[temp.index]) {
-                if (minCost[node.index] > minCost[temp.index] + node.cost) {
-                    minCost[node.index] = minCost[temp.index] + node.cost;
+            Node curr = queue.poll();
+//            System.out.println(curr.index + " : ");
+            for (Node node : costs[curr.index]) {
+                if (minCost[node.index] > minCost[curr.index] + node.cost) {
+                    minCost[node.index] = minCost[curr.index] + node.cost;
                     queue.add(node);
+//                    System.out.println(curr.index + " -> " + node.index);
                 }
             }
+//            System.out.println(Arrays.toString(minCost));
         }
-
         return minCost[arrival];
     }
 }
 
-class Node implements Comparable<Node>{
+class Node implements Comparable<Node> {
     int index;
     int cost;
 

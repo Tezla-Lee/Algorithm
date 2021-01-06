@@ -95,6 +95,11 @@ class SinglyLinkedList {
         Node prev = null;
         int count = 0;
 
+        if (index == 0) {
+            head = new Node(value, head);
+            return true;
+        }
+
         while (curr != null) {
             count++;
             prev = curr;
@@ -106,10 +111,7 @@ class SinglyLinkedList {
         }
 
         if (index == count) {
-            Node newNode = new Node(value, curr);
-            if (prev != null) {
-                prev.next = newNode;
-            }
+            prev.next = new Node(value, curr);
             return true;
         }
         return false;
