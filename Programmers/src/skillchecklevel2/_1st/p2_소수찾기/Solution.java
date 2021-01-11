@@ -1,4 +1,4 @@
-package skillchecklevel2.p2_소수찾기;
+package skillchecklevel2._1st.p2_소수찾기;
 
 import java.util.Arrays;
 

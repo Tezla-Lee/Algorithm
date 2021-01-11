@@ -1,4 +1,4 @@
-package skillchecklevel2.p1_단체사진;
+package skillchecklevel2._1st.p1_단체사진;
 
 import java.util.ArrayList;
 
