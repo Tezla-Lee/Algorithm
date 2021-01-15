@@ -10,11 +10,11 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int k = Integer.parseInt(st.nextToken());
+        n = Integer.parseInt(st.nextToken());
+        k = Integer.parseInt(st.nextToken());
 
         int[][] arr = new int[n][2];
-        int[][] dp = new int[k + 1][k + 1];
+        long[][] dp = new long[n][k + 1];
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
@@ -22,34 +22,44 @@ public class Main {
             int v = Integer.parseInt(st.nextToken());
             arr[i][0] = w;
             arr[i][1] = v;
-            max = Math.max(max, v);
         }
 
-        System.out.println(solution(arr, dp, k));
+        System.out.println(solution(arr, dp));
     }
 
-    static long max = Long.MIN_VALUE;
+    static int n;
+    static int k;
 
-    static long solution(int[][] arr, int[][] dp, int k) {
-        for (int i = 0; i < arr.length; i++) {
+    static long solution(int[][] arr, long[][] dp) {
+        long max = 0;
+
+        for (int i = 0; i < n; i++) {
             int w = arr[i][0];
             int v = arr[i][1];
-//            dp[w] = v;
 
-            for (int j = 1; j < dp.length; j++) {
+            if (w > k) {
+                continue;
+            }
 
+            if (i == 0) {
+                dp[0][w] = v;
+                max = Math.max(max, v);
+                continue;
+            }
+
+            for (int j = 0; j <= k; j++) {
+                if (dp[i][j] == 0) {
+                    dp[i][j] = dp[i - 1][j];
+                    max = Math.max(max, dp[i][j]);
+                }
+
+                if (j + w <= k) {
+                    dp[i][j + w] = Math.max(dp[i - 1][j + w], dp[i - 1][j] + v);
+                    max = Math.max(dp[i][j + w], max);
+                }
             }
         }
+
         return max;
-    }
-}
-
-class thing {
-    int weight;
-    int value;
-
-    public thing(int weight, int value) {
-        this.weight = weight;
-        this.value = value;
     }
 }
