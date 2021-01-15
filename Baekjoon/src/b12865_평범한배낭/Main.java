@@ -14,7 +14,7 @@ public class Main {
         k = Integer.parseInt(st.nextToken());
 
         int[][] arr = new int[n][2];
-        long[][] dp = new long[n][k + 1];
+        int[][] dp = new int[n][k + 1];
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
@@ -30,8 +30,8 @@ public class Main {
     static int n;
     static int k;
 
-    static long solution(int[][] arr, long[][] dp) {
-        long max = 0;
+    static int solution(int[][] arr, int[][] dp) {
+        int max = 0;
 
         for (int i = 0; i < n; i++) {
             int w = arr[i][0];
@@ -48,17 +48,23 @@ public class Main {
             }
 
             for (int j = 0; j <= k; j++) {
-                if (dp[i][j] == 0) {
-                    dp[i][j] = dp[i - 1][j];
-                    max = Math.max(max, dp[i][j]);
-                }
-
                 if (j + w <= k) {
                     dp[i][j + w] = Math.max(dp[i - 1][j + w], dp[i - 1][j] + v);
-                    max = Math.max(dp[i][j + w], max);
                 }
+
+                if (dp[i][j] == 0) {
+//                    if (j > 0) {
+//                        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+//                    }
+                    dp[i][j] = dp[i - 1][j];
+                }
+                max = Math.max(max, dp[i][j]);
             }
         }
+
+//        for (int i = 0; i < dp.length; i++) {
+//            System.out.println(Arrays.toString(dp[i]));
+//        }
 
         return max;
     }
