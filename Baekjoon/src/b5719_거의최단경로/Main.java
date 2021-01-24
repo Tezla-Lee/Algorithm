@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -69,16 +70,16 @@ public class Main {
         Arrays.fill(d, Integer.MAX_VALUE);
         d[start] = 0;
 
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Node> queue = new PriorityQueue<>();
 
-        queue.add(start);
+        queue.add(new Node(start, 0));
 
         while (!queue.isEmpty()) {
-            int temp = queue.poll();
+            Node current = queue.poll();
             for (int i = 0; i < edges.length; i++) {
-                if (edges[temp][i] != 0 && d[i] > d[temp] + edges[temp][i]) {
-                    d[i] = d[temp] + edges[temp][i];
-                    queue.add(i);
+                if (edges[current.number][i] != 0 && d[i] > current.distance + edges[current.number][i]) {
+                    d[i] = current.distance + edges[current.number][i];
+                    queue.add(new Node(i, d[i]));
                 }
             }
         }
@@ -101,5 +102,20 @@ public class Main {
                 }
             }
         }
+    }
+}
+
+class Node implements Comparable<Node> {
+    int number;
+    int distance;
+
+    public Node(int number, int distance) {
+        this.number = number;
+        this.distance = distance;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return distance - o.distance;
     }
 }
