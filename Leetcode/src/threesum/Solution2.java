@@ -20,28 +20,22 @@ public class Solution2 {
             }
 
             while (left < right) {
-                int b = nums[left];
-                int c = nums[right];
+                int num1 = nums[left];
+                int num2 = nums[right];
 
-                int sum = num + b + c;
+                int sum = num + num1 + num2;
 
                 if (sum > 0) {
                     right--;
                 } else if (sum < 0) {
                     left++;
                 } else {
-                    List<Integer> list = new ArrayList<>();
+                    answer.add(Arrays.asList(num, num1, num2));
 
-                    list.add(num);
-                    list.add(b);
-                    list.add(c);
-
-                    answer.add(list);
-
-                    while (left + 1 < nums.length && b == nums[left + 1]) {
+                    while (left + 1 < nums.length && num1 == nums[left + 1]) {
                         left++;
                     }
-                    while (right - 1 >= 0 && c == nums[right - 1]) {
+                    while (right - 1 >= 0 && num2 == nums[right - 1]) {
                         right--;
                     }
                     left++;
