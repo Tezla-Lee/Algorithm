@@ -1,4 +1,4 @@
-package Level1.두정수사이의합;
+package level1.두정수사이의합;
 
 public class Solution {
     public long solution(int a, int b) {

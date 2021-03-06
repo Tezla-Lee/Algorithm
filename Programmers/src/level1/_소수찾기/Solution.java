@@ -1,4 +1,4 @@
-package Level1._소수찾기;
+package level1._소수찾기;
 
 import java.util.*;
 

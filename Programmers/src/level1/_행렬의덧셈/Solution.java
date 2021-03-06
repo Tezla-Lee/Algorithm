@@ -1,4 +1,4 @@
-package Level1._행렬의덧셈;
+package level1._행렬의덧셈;
 
 class Solution {
     public int[][] solution(int[][] arr1, int[][] arr2) {
