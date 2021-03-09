@@ -1,4 +1,4 @@
-package b1987;
+package b1987_알파벳;
 
 import java.io.BufferedReader;
 import java.io.IOException;
