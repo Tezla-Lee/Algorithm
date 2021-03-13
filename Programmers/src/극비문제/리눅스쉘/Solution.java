@@ -1,13 +1,11 @@
 package 극비문제.리눅스쉘;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Solution {
     public String solution(String[] directory, String[] command) {
-        root = new Directory(null, "/");
+        root = new Directory(null, "");
 
         for (String dir : directory) {
             mkdir(dir);
@@ -32,6 +30,10 @@ public class Solution {
         Directory currDir = root;
 
         for (String d : dirs) {
+            if (d.equals("")) {
+                continue;
+            }
+
             boolean flag = true;
 
             for (Directory child : currDir.children) {
@@ -100,8 +102,15 @@ public class Solution {
     }
 
     static void dfs(Directory directory, StringBuilder sb, String fullDir) {
-        fullDir += "/" + directory.name;
+        if (directory.parent == root) {
+            fullDir += directory.name;
+        } else {
+            fullDir += "/" + directory.name;
+        }
+
         sb.append(fullDir).append("\n");
+
+        directory.children.sort((a, b) -> a.name.compareTo(b.name));
 
         for (Directory child : directory.children) {
             dfs(child, sb, fullDir);
@@ -109,13 +118,13 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-//        System.out.println(new Solution().solution(new String[]{"/", "/hello", "/hello/tmp"}, new String[]{"mkdir /abc"}));
-        String s = "/hello/tmp";
-        System.out.println(Arrays.toString(s.split("/")));
+        System.out.println(new Solution().solution(new String[]{"/", "/hello", "/hello/tmp"}, new String[]{"mkdir /abc"}));
+        System.out.println(new Solution().solution(new String[]{"/", "/hello", "/hello/tmp", "/root", "/root/bcd", "/root/abcd", "/root/abcd/etc", "/root/abcd/hello"},
+                new String[]{"mkdir /root/tmp", "cp /hello /root/tmp", "rm /hello"}));
     }
 }
 
-class Directory implements Comparator<Directory> {
+class Directory {
     Directory parent;
     List<Directory> children;
     String name;
@@ -123,16 +132,6 @@ class Directory implements Comparator<Directory> {
     public Directory(Directory parent, String name) {
         this.parent = parent;
         this.name = name;
-        this.children = new LinkedList<>();
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    @Override
-    public int compare(Directory o1, Directory o2) {
-        return o1.name.compareTo(o2.name);
+        this.children = new ArrayList<>();
     }
 }
