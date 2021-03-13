@@ -9,7 +9,8 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(br.readLine());
         graph = new int[n + 1][n + 1];
-        isBought = new boolean[n + 1];
+        visit = new int[n + 1][n + 1];
+//        isBought = new boolean[n + 1];
 
         for (int i = 1; i <= n; i++) {
             String[] prices = br.readLine().split("");
@@ -18,7 +19,8 @@ public class Main {
             }
         }
 
-        isBought[1] = true;
+//        isBought[1] = true;
+
         dfs(1, 0, 1);
         System.out.println(max);
     }
@@ -26,18 +28,21 @@ public class Main {
     static int n;
     static int max = Integer.MIN_VALUE;
     static int[][] graph;
-    static boolean[] isBought;
-
+    static int[][] visit;
+//    static boolean[] isBought;
+//
     static void dfs(int artist, int currPrice, int count) {
         max = Math.max(max, count);
 
         for (int i = 1; i <= n; i++) {
-            if (!isBought[i] && graph[artist][i] >= currPrice) {
-                isBought[i] = true;
-                dfs(i, graph[artist][i], count + 1);
-                isBought[i] = false;
+//            if (!isBought[i] && graph[artist][i] >= currPrice) {
+//                isBought[i] = true;
+//                dfs(i, graph[artist][i], count + 1);
+//                isBought[i] = false;
+//            }
+            if (visit[artist][i] > 0) {
+
             }
         }
     }
-
 }
