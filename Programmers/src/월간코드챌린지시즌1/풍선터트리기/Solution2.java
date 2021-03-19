@@ -4,8 +4,24 @@ class Solution2 {
     public int solution(int[] a) {
         int answer = 0;
 
+        leftDP = new int[a.length];
+        rightDP = new int[a.length];
+
+        solve(a);
+
         for (int i = 0; i < a.length; i++) {
-            if (!available(a, i)) {
+            boolean left = false;
+            boolean right = false;
+
+            if (i > 0 && leftDP[i - 1] < a[i]) {
+                left = true;
+            }
+
+            if (i < a.length - 1 && rightDP[i + 1] < a[i]) {
+                right = true;
+            }
+
+            if (!(left && right)) {
                 answer++;
             }
         }
@@ -13,25 +29,20 @@ class Solution2 {
         return answer;
     }
 
-    static boolean available(int[] a, int index) {
-        boolean left = false;
-        boolean right = false;
+    static int[] leftDP;
+    static int[] rightDP;
 
-        for (int i = 0; i < index; i++) {
-            if (a[i] < a[index]) {
-                left = true;
-                break;
-            }
+    static void solve(int[] a) {
+        leftDP[0] = a[0];
+        rightDP[a.length - 1] = a[a.length - 1];
+
+        for (int i = 1; i < a.length; i++) {
+            leftDP[i] = Math.min(a[i], leftDP[i - 1]);
         }
 
-        for (int i = index + 1; i < a.length; i++) {
-            if (a[i] < a[index]) {
-                right = true;
-                break;
-            }
+        for (int i = a.length - 2; i >= 0; i--) {
+            rightDP[i] = Math.min(rightDP[i + 1], a[i]);
         }
-
-        return left && right;
     }
 
     public static void main(String[] args) {
