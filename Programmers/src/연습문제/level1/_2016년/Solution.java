@@ -1,4 +1,4 @@
-package level1._2016년;
+package 연습문제.level1._2016년;
 
 
 public class Solution {
