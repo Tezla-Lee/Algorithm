@@ -1,4 +1,4 @@
-package level1._제일작은수제거하기;
+package 연습문제.level1._제일작은수제거하기;
 
 class Solution {
     public int[] solution(int[] arr) {

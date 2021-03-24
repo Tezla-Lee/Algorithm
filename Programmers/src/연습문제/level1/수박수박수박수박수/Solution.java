@@ -1,4 +1,4 @@
-package level1.수박수박수박수박수;
+package 연습문제.level1.수박수박수박수박수;
 
 class Solution {
     public String solution(int n) {

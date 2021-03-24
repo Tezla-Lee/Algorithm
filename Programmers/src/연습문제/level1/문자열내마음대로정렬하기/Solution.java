@@ -1,4 +1,4 @@
-package level1.문자열내마음대로정렬하기;
+package 연습문제.level1.문자열내마음대로정렬하기;
 
 import java.util.Arrays;
 

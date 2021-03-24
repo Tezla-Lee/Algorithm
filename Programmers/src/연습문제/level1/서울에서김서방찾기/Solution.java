@@ -1,4 +1,4 @@
-package level1.서울에서김서방찾기;
+package 연습문제.level1.서울에서김서방찾기;
 
 public class Solution {
     public String solution(String[] seoul) {

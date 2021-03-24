@@ -1,6 +1,8 @@
-package level2._메뉴리뉴얼;
+package 연습문제.level2._메뉴리뉴얼;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 class Solution {
     public String[] solution(String[] orders, int[] course) {
