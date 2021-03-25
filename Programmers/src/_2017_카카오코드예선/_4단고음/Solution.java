@@ -45,7 +45,7 @@ class Solution {
             lowerPitch(pitch / 3, stack - 2);
         }
 
-        if ((pitch/ - 1) % 3 == 0 && Math.pow(3, (stack + 1) / 2) > pitch - 1) {
+        if ((pitch / -1) % 3 == 0 && Math.pow(3, (stack + 1) / 2) > pitch - 1) {
             return;
         }
         lowerPitch(pitch - 1, stack + 1);
