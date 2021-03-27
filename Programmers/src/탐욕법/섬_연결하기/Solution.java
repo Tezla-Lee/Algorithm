@@ -1,35 +1,71 @@
 package 탐욕법.섬_연결하기;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Solution {
-    public int solution(int n, int[][] costs) {
-        int answer = 0;
+    List<List<Node>> lists;
+    boolean[] isVisited;
 
-        int[] parent = new int[n];
+    public int solution(int n, int[][] costs) {
+        lists = new ArrayList<>();
+        isVisited = new boolean[n];
+
         for (int i = 0; i < n; i++) {
-            parent[i] = i;
+            lists.add(new ArrayList<>());
         }
 
-        // 비용 오름차순 정렬
-        Arrays.sort(costs, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[2] - o2[2];
+        for (int[] info : costs) {
+            int num1 = info[0];
+            int num2 = info[1];
+            int cost = info[2];
+
+            lists.get(num1).add(new Node(num2, cost));
+            lists.get(num2).add(new Node(num1, cost));
+        }
+
+        return visit();
+    }
+
+    int visit() {
+        int totalCost = 0;
+        Queue<Node> pq = new PriorityQueue<>(); // 가까운 노드들부터 방문하기 위해
+
+        pq.add(new Node(0, 0));
+
+        while (!pq.isEmpty()) {
+            Node curr = pq.poll();
+
+            if (!isVisited[curr.num]) {
+                totalCost += curr.cost;
+
+                for (Node next : lists.get(curr.num)) {
+                    if (!isVisited[next.num]) {
+                        pq.offer(next);
+                    }
+                }
+
+                isVisited[curr.num] = true;
             }
-        });
+        }
 
+        return totalCost;
+    }
+}
 
-        return answer;
+class Node implements Comparable<Node> {
+    int num;
+    int cost;
+
+    public Node(int num, int cost) {
+        this.num = num;
+        this.cost = cost;
     }
 
-    static int getParent(int[] parent) {
-
-        return 0;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new Solution().solution(4, new int[][]{{0, 1, 1}, {0, 2, 2}, {1, 2, 5}, {1, 3, 1}, {2, 3, 8}}));
+    @Override
+    public int compareTo(Node o) {
+        return cost - o.cost;
     }
 }
