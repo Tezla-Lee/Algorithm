@@ -41,9 +41,6 @@ public class Main {
                 calculateC();
             }
             count++;
-
-            System.out.println("count " + count);
-            printBoard();
         }
 
         if (count == 100 && board[r - 1][c - 1] != k) {
@@ -56,10 +53,13 @@ public class Main {
     static void calculateR() {
         HashMap<Integer, Integer> map;
         PriorityQueue<Number> pq;
+        int[][] tempBoard = new int[100][100];
+        int tempCol = 0;
 
         for (int i = 0; i < maxRow; i++) {
             map = new HashMap<>();
             pq = new PriorityQueue<>();
+
             for (int j = 0; j < maxCol; j++) {
                 if (board[i][j] == 0) {
                     continue;
@@ -76,25 +76,26 @@ public class Main {
             while (!pq.isEmpty()) {
                 Number num = pq.poll();
 
-                board[i][col++] = num.value;
-                board[i][col++] = num.count;
+                tempBoard[i][col++] = num.value;
+                tempBoard[i][col++] = num.count;
             }
 
-            maxCol = Math.max(maxCol, col);
-
-            while (board[i][col] != 0) {
-                board[i][col++] = 0;
-            }
+            tempCol = Math.max(tempCol, col);
         }
+        maxCol = tempCol;
+        board = tempBoard;
     }
 
     static void calculateC() {
         HashMap<Integer, Integer> map;
         PriorityQueue<Number> pq;
+        int[][] tempBoard = new int[100][100];
+        int tempRow = 0;
 
         for (int i = 0; i < maxCol; i++) {
             map = new HashMap<>();
             pq = new PriorityQueue<>();
+
             for (int j = 0; j < maxRow; j++) {
                 if (board[j][i] == 0) {
                     continue;
@@ -110,16 +111,14 @@ public class Main {
 
             while (!pq.isEmpty()) {
                 Number num = pq.poll();
-                board[row++][i] = num.value;
-                board[row++][i] = num.count;
+                tempBoard[row++][i] = num.value;
+                tempBoard[row++][i] = num.count;
             }
 
-            maxRow = Math.max(maxRow, row);
-
-            while (board[row][i] != 0) {
-                board[row++][i] = 0;
-            }
+            tempRow = Math.max(tempRow, row);
         }
+        maxRow = tempRow;
+        board = tempBoard;
     }
 
     static void printBoard() {
