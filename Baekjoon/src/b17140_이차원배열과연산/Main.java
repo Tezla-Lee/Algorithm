@@ -43,23 +43,25 @@ public class Main {
             count++;
         }
 
-        if (count == 100 && board[r - 1][c - 1] != k) {
+        if (count == 100 && board[r - 1][c - 1] != k) { // 100초 지났는데 조건 x
             System.out.println("-1");
         } else {
             System.out.println(count);
         }
     }
 
+    // R 연산
     static void calculateR() {
         HashMap<Integer, Integer> map;
         PriorityQueue<Number> pq;
-        int[][] tempBoard = new int[100][100];
+        int[][] tempBoard = new int[100][100]; // 연산 결과를 저장할 배열
         int tempCol = 0;
 
         for (int i = 0; i < maxRow; i++) {
             map = new HashMap<>();
             pq = new PriorityQueue<>();
 
+            // 해쉬맵으로 숫자 개수를 센다.
             for (int j = 0; j < maxCol; j++) {
                 if (board[i][j] == 0) {
                     continue;
@@ -67,25 +69,26 @@ public class Main {
                 map.put(board[i][j], map.getOrDefault(board[i][j], 0) + 1);
             }
 
+            // 해쉬맵에 들어 있는 요소들을 우선순위큐를 이용하여 정렬
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 pq.add(new Number(entry.getKey(), entry.getValue()));
             }
 
             int col = 0;
 
-            while (!pq.isEmpty()) {
+            while (!pq.isEmpty()) { // 정렬한 애들을 배열에 삽입
                 Number num = pq.poll();
-
                 tempBoard[i][col++] = num.value;
                 tempBoard[i][col++] = num.count;
             }
 
             tempCol = Math.max(tempCol, col);
         }
-        maxCol = tempCol;
+        maxCol = tempCol; // 최대 열 개수 갱신
         board = tempBoard;
     }
 
+    // C 연산
     static void calculateC() {
         HashMap<Integer, Integer> map;
         PriorityQueue<Number> pq;
