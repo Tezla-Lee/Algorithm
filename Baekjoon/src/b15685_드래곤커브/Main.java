@@ -1,4 +1,4 @@
- package b15685_드래곤커브;
+package b15685_드래곤커브;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -58,7 +58,7 @@ public class Main {
             List<Point> temp = new ArrayList<>();
 
             for (Point point : points) {
-                Point rotate = rotateAndMove(point, lastPoint);
+                Point rotate = rotate(point, lastPoint);
                 if (rotate.getX() >= 0 && rotate.getX() <= 100 && rotate.getY() >= 0 && rotate.getY() <= 100) {
                     temp.add(rotate);
                 }
@@ -71,7 +71,7 @@ public class Main {
         totalPoints.addAll(points);
     }
 
-    static Point rotateAndMove(Point point, Point center) {
+    static Point rotate(Point point, Point center) {
         int x = point.getX() - center.getX();
         int y = point.getY() - center.getY();
 
