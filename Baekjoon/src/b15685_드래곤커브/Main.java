@@ -71,6 +71,7 @@ public class Main {
         totalPoints.addAll(points);
     }
 
+    // point를 center 기준으로 시계방향으로 90도 돌림
     static Point rotate(Point point, Point center) {
         int x = point.getX() - center.getX();
         int y = point.getY() - center.getY();
