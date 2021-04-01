@@ -6,6 +6,7 @@ import java.util.List;
 
 class Solution {
     public String minWindow(String s, String t) {
+        String answer = s;
         char[] sChars = s.toCharArray();
         char[] tChars = t.toCharArray();
 
@@ -23,6 +24,7 @@ class Solution {
 
         for (int i = 0; i < sChars.length; i++) {
             list.add(sChars[i]);
+            sb.append(sChars[i]);
 
             if (tMap.containsKey(sChars[i])) {
                 sMap.put(sChars[i], sMap.getOrDefault(sChars[i], 0) + 1);
@@ -44,6 +46,11 @@ class Solution {
                         }
 
                         list.remove(0);
+                        sb.deleteCharAt(0);
+                    }
+
+                    if (sb.length() < answer.length()) {
+                        answer = sb.toString();
                     }
                 }
             }
@@ -55,13 +62,14 @@ class Solution {
 
         while (!tMap.containsKey(list.get(list.size() - 1))) {
             list.remove(list.size() - 1);
+            sb.deleteCharAt(sb.length() - 1);
         }
 
-        while (!list.isEmpty()) {
-            sb.append(list.remove(0));
+        if (sb.length() < answer.length()) {
+            answer = sb.toString();
         }
 
-        return sb.toString();
+        return answer;
     }
 
     public static void main(String[] args) {
