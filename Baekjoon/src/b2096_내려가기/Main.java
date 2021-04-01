@@ -7,6 +7,8 @@ import java.util.StringTokenizer;
 
 public class Main {
     static int[][] board;
+    static int[] dMin;
+    static int[] dMax;
     static int n;
 
     public static void main(String[] args) throws IOException {
@@ -26,40 +28,38 @@ public class Main {
     }
 
     static void printMaxAndMin() {
-        int[][] dMax = new int[n][3];
-        int[][] dMin = new int[n][3];
-        dMax[0] = board[0];
-        dMin[0] = board[0];
+        dMax = board[0].clone();
+        dMin = board[0].clone();
 
         for (int i = 1; i < n; i++) {
-            setMax(dMax, i);
-            setMin(dMin, i);
+            setMax(i);
+            setMin(i);
         }
 
-        int max = Math.max(Math.max(dMax[n - 1][0], dMax[n - 1][1]), dMax[n - 1][2]);
-        int min = Math.min(Math.min(dMin[n - 1][0], dMin[n - 1][1]), dMin[n - 1][2]);
+        int max = Math.max(Math.max(dMax[0], dMax[1]), dMax[2]);
+        int min = Math.min(Math.min(dMin[0], dMin[1]), dMin[2]);
 
         System.out.println(max + " " + min);
     }
 
 
-    static void setMin(int[][] d, int index) {
-        int min0 = Math.min(d[index - 1][0], d[index - 1][1]);
-        int min2 = Math.min(d[index - 1][2], d[index - 1][1]);
+    static void setMin(int index) {
+        int min0 = Math.min(dMin[0], dMin[1]);
+        int min2 = Math.min(dMin[2], dMin[1]);
         int min1 = Math.min(min0, min2);
 
-        d[index][0] = min0 + board[index][0];
-        d[index][1] = min1 + board[index][1];
-        d[index][2] = min2 + board[index][2];
+        dMin[0] = min0 + board[index][0];
+        dMin[1] = min1 + board[index][1];
+        dMin[2] = min2 + board[index][2];
     }
 
-    static void setMax(int[][] d, int index) {
-        int max0 = Math.max(d[index - 1][0], d[index - 1][1]);
-        int max2 = Math.max(d[index - 1][2], d[index - 1][1]);
+    static void setMax(int index) {
+        int max0 = Math.max(dMax[0], dMax[1]);
+        int max2 = Math.max(dMax[2], dMax[1]);
         int max1 = Math.max(max0, max2);
 
-        d[index][0] = max0 + board[index][0];
-        d[index][1] = max1 + board[index][1];
-        d[index][2] = max2 + board[index][2];
+        dMax[0] = max0 + board[index][0];
+        dMax[1] = max1 + board[index][1];
+        dMax[2] = max2 + board[index][2];
     }
 }
