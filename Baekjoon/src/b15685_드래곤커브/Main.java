@@ -55,17 +55,16 @@ public class Main {
         points.add(lastPoint);
 
         while (g-- > 0) {
-            List<Point> temp = new ArrayList<>();
+            int size = points.size();
 
-            for (Point point : points) {
-                Point rotate = rotate(point, lastPoint);
+            for (int i = 0; i < size; i++) {
+                Point rotate = rotate(points.get(i), lastPoint);
                 if (rotate.getX() >= 0 && rotate.getX() <= 100 && rotate.getY() >= 0 && rotate.getY() <= 100) {
-                    temp.add(rotate);
+                    points.add(rotate);
                 }
             }
 
-            lastPoint = temp.get(0);
-            points.addAll(temp);
+            lastPoint = points.get(size);
         }
 
         totalPoints.addAll(points);
