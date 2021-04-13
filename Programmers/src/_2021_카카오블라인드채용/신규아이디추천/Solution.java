@@ -2,89 +2,94 @@ package _2021_카카오블라인드채용.신규아이디추천;
 
 class Solution {
     public String solution(String new_id) {
-        // 1단계
-        new_id = new_id.toLowerCase();
+        return new ID(new_id.toLowerCase())
+                .removeSpecialLetter()
+                .replacePointsToPoint()
+                .removeFirstAndLastPoint()
+                .appendA()
+                .splitLength15AndRemoveLastPoint()
+                .appendRepeat()
+                .id;
+    }
 
-        // 2단계
-        new_id = removeSpecialLetter(new_id);
+    static class ID {
+        private String id;
 
-        // 3단계
-        new_id = replacePointsToPoint(new_id);
-
-        // 4단계
-        new_id = removeFirstAndLastPoint(new_id);
-
-        // 5단계
-        if (new_id.equals("")) {
-            new_id = "a";
+        public ID(String id) {
+            this.id = id;
         }
 
-        // 6단계
-        new_id = splitLength15AndRemoveLastPoint(new_id);
+        private boolean filter(char c) {
+            return Character.isLetterOrDigit(c) || c == '-' || c == '_' || c == '.';
+        }
 
-        // 7단계
-        new_id = appendRepeat(new_id);
+        private ID removeSpecialLetter() {
+            StringBuilder sb = new StringBuilder();
 
-        return new_id;
-    }
-
-    private boolean filter(char c) {
-        return Character.isLetterOrDigit(c) || c == '-' || c == '_' || c == '.';
-    }
-
-    private String removeSpecialLetter(String s) {
-        StringBuilder sb = new StringBuilder();
-
-        for (char c : s.toCharArray()) {
-            if (filter(c)) {
-                sb.append(c);
+            for (char c : id.toCharArray()) {
+                if (filter(c)) {
+                    sb.append(c);
+                }
             }
-        }
-        return sb.toString();
-    }
 
-    private String replacePointsToPoint(String s) {
-        while (!s.equals(s.replace("..", "."))) {
-            s = s.replace("..", ".");
+            id = sb.toString();
+
+            return this;
         }
 
-        return s;
-    }
+        private ID replacePointsToPoint() {
+            while (!id.equals(id.replace("..", "."))) {
+                id = id.replace("..", ".");
+            }
 
-    private String removeFirstAndLastPoint(String s) {
-        if (s.charAt(0) == '.') {
-            s = s.replaceFirst(".", "");
+            return this;
         }
 
-        if (!s.isEmpty() && s.charAt(s.length() - 1) == '.') {
-            s = s.substring(0, s.length() - 1);
+        private ID removeFirstAndLastPoint() {
+            if (id.charAt(0) == '.') {
+                id = id.replaceFirst(".", "");
+            }
+
+            if (!id.isEmpty() && id.charAt(id.length() - 1) == '.') {
+                id = id.substring(0, id.length() - 1);
+            }
+
+            return this;
         }
 
-        return s;
-    }
+        private ID splitLength15AndRemoveLastPoint() {
+            if (id.length() < 16) {
+                return this;
+            }
 
-    private String splitLength15AndRemoveLastPoint(String s) {
-        if (s.length() < 16) {
-            return s;
+            id = id.substring(0, 15);
+
+            if (id.charAt(id.length() - 1) == '.') {
+                id = id.substring(0, 14);
+            }
+
+            return this;
         }
 
-        s = s.substring(0, 15);
+        private ID appendRepeat() {
+            StringBuilder sb = new StringBuilder(id);
+            char last = id.charAt(id.length() - 1);
 
-        if (s.charAt(s.length() - 1) == '.') {
-            s = s.substring(0, 14);
+            while (sb.length() < 3) {
+                sb.append(last);
+            }
+
+            id = sb.toString();
+
+            return this;
         }
 
-        return s;
-    }
+        private ID appendA() {
+            if (id == null || id.equals("")) {
+                id = "a";
+            }
 
-    private String appendRepeat(String s) {
-        StringBuilder sb = new StringBuilder(s);
-        char last = s.charAt(s.length() - 1);
-
-        while (sb.length() < 3) {
-            sb.append(last);
+            return this;
         }
-
-        return sb.toString();
     }
 }
