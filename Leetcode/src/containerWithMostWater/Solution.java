@@ -13,6 +13,10 @@ class Solution {
             int left = 0;
             int right = height.length - 1;
 
+            if ((right - left) * i <= water) {
+                break;
+            }
+
             for (int j = 0; j < height.length; j++) {
                 if (i <= height[j]) {
                     left = j;
