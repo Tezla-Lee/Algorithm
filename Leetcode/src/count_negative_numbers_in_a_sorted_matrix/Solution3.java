@@ -1,4 +1,4 @@
-package countNegativeNumbersInASortedMatrix;
+package count_negative_numbers_in_a_sorted_matrix;
 
 public class Solution3 {
     public int countNegatives(int[][] grid) {

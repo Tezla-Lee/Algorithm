@@ -1,4 +1,4 @@
-package mergeTwoSortedLists;
+package merge_two_sorted_lists;
 
 import java.util.ArrayList;
 import java.util.Comparator;

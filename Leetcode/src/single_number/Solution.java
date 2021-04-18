@@ -1,4 +1,4 @@
-package singlenumber;
+package single_number;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;

@@ -1,4 +1,4 @@
-package minimumWindowSubstring;
+package minimum_window_substring;
 
 import java.util.ArrayList;
 import java.util.HashMap;

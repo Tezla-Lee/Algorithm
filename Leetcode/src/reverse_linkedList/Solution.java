@@ -1,4 +1,4 @@
-package reverseLinkedList;
+package reverse_linkedList;
 
 class ListNode {
     int val;

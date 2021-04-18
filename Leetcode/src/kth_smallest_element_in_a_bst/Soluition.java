@@ -1,4 +1,4 @@
-package kthSmallestElementInABst;
+package kth_smallest_element_in_a_bst;
 
 import java.util.PriorityQueue;
 import java.util.Queue;

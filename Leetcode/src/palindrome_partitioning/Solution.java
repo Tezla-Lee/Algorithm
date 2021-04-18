@@ -1,4 +1,4 @@
-package palindromePartitioning;
+package palindrome_partitioning;
 
 import java.util.ArrayList;
 import java.util.List;

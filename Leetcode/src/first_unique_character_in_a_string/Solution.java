@@ -1,4 +1,4 @@
-package firstUniqueCharacterInAString;
+package first_unique_character_in_a_string;
 
 class Solution {
     public int firstUniqChar(String s) {
