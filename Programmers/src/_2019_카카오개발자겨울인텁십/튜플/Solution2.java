@@ -2,34 +2,40 @@ package _2019_카카오개발자겨울인텁십.튜플;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Solution2 {
     public int[] solution(String s) {
-        char[] chars = s.toCharArray();
-        StringBuilder sb = new StringBuilder();
-        Set<Integer> set = new HashSet<>();
-        List<Integer> list = new ArrayList<>();
+        String[] tupleStrings = s.substring(2, s.length() - 2).split("},\\{");
 
-        for (int i = 0; i < chars.length - 1; i++) {
-            if (chars[i] == ',' || i == chars.length - 2) {
-                int num = Integer.parseInt(sb.toString());
-                if (!set.contains(num)) {
-                    set.add(num);
-                    list.add(num);
-                }
-                sb = new StringBuilder();
+        List<List<Integer>> elements = new ArrayList<>();
+        List<Integer> tuple = new ArrayList<>();
+
+        for (String tupleString : tupleStrings) {
+            String[] numbers = tupleString.split(",");
+            List<Integer> element = new ArrayList<>();
+
+            for (String number : numbers) {
+                element.add(Integer.parseInt(number));
             }
-            if (Character.isDigit(chars[i])) {
-                sb.append(chars[i]);
+
+            elements.add(element);
+        }
+
+        elements.sort((a, b) -> a.size() - b.size());
+
+        for (List<Integer> list : elements) {
+            for (int num : list) {
+                if (!tuple.contains(num)) {
+                    tuple.add(num);
+                }
             }
         }
-        int[] answer = new int[list.size()];
+
+        int[] answer = new int[tuple.size()];
 
         for (int i = 0; i < answer.length; i++) {
-            answer[i] = list.get(i);
+            answer[i] = tuple.get(i);
         }
 
         return answer;
