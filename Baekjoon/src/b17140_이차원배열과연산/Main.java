@@ -69,7 +69,7 @@ public class Main {
                 map.put(board[i][j], map.getOrDefault(board[i][j], 0) + 1);
             }
 
-            // 해쉬맵에 들어 있는 요소들을 우선순위큐를 이용하여 정렬
+            // 해쉬맵에 들어 있는 요소들을 우선순위큐를 이용하여 연습문제.정렬
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 pq.add(new Number(entry.getKey(), entry.getValue()));
             }
