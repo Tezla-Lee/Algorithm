@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Solution {
-    private int[] dr = {0, 0, 1, -1};
-    private int[] dc = {1, -1, 0, 0};
+    private final int[] dr = {0, 0, 1, -1};
+    private final int[] dc = {1, -1, 0, 0};
 
     public int numIslands(char[][] grid) {
         int count = 0;
